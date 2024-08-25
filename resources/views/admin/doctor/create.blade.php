@@ -135,7 +135,7 @@
                                                 	<label>Photo upload</label>
                                                     <input type="file" class="form-control file-upload-info @error('photo') is-invalid @enderror"  placeholder="Upload Image" name="photo">
                                                     <span class="input-group-append">
-                                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                                                    
                                                     </span>
                                                     @error('photo')
 				                                    <span class="invalid-feedback" role="alert">
