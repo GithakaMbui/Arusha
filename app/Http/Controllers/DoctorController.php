@@ -103,7 +103,7 @@ class DoctorController extends Controller
             'email' => 'required|unique:users',
             'email' => 'required|min:6|max:25',
             'gender' => 'required',
-            'education' => 'required',
+            'npi_number' => 'required',
             'address' => 'required',
             'department' => 'required',
             'phone_number' => 'required|numeric',
