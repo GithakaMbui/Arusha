@@ -29,6 +29,11 @@
 
 <div class="row justify-content-center">
 	<div class="col-lg-10"> 
+		@if(Session::has('message'))
+			<div class="alert alert-success">
+				{{Session::get('message')}}
+			</div>
+		@endif
 		<div class="card">
 			<div class="card-header"><h3>Add Doctor</h3></div>
 			<div class="card-body">
@@ -67,6 +72,7 @@
 						<div class="col-lg-6">
 							<label for="">Gender</label>
 							<select class="form-control @error('gender') is-invalid @enderror" name="gender">
+								<option value="">select</option>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select>
@@ -111,7 +117,7 @@
 						</div>
 						<div class="col-lg-6">
 							<label for="">Phone Number</label>
-							<input type="text" name="phone_number" class="form-control @error('phone_number	') is-invalid @enderror" placeholder="doctor phone number">
+							<input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" placeholder="phone_number">
 							@error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -127,11 +133,11 @@
                                              <div class="col-md-6">
                                                 <div class="form-group">
                                                 	<label>Photo upload</label>
-                                                    <input type="file" class="form-control file-upload-info @error('image') is-invalid @enderror"  placeholder="Upload Image" name="image">
+                                                    <input type="file" class="form-control file-upload-info @error('photo') is-invalid @enderror"  placeholder="Upload Image" name="photo">
                                                     <span class="input-group-append">
                                                     <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                                                     </span>
-                                                    @error('image')
+                                                    @error('photo')
 				                                    <span class="invalid-feedback" role="alert">
 				                                        <strong>{{ $message }}</strong>
 				                                    </span>
