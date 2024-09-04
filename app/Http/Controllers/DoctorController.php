@@ -39,10 +39,8 @@ class DoctorController extends Controller
        
        $this->validateStore($request);
        $data = $request->all();
-       $photo = $request->file('photo');
-       $name = $photo->hashName();
-       $destination = public_path('/images');
-       $photo->move($destination, $name);
+       $name = (new User)->useAvatar($request);
+       
         $data['photo'] = $name;
        $data['password'] = bcrypt($request->password);
        User::create($data);
@@ -89,10 +87,11 @@ class DoctorController extends Controller
         $imageName=$user->photo;
         $userPassword = $user->password;
         if($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $imageName = $photo->hashName();
-            $destination = public_path('/images');
-            $photo->move($destination, $imageName);
+            
+            $imageName = (new User)->useAvatar($request);
+            unlink(public_path('images/'.$user->image));    
+       
+        
         }  
             $data['photo'] = $imageName;
 
