@@ -43,6 +43,7 @@
                                                     <th>Email</th>
                                                     <th>Address</th>
                                                     <th>Phone Number</th>
+                                                    <th>Department</th>
                                                     <th class="nosort">&nbsp;</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
@@ -56,6 +57,8 @@
                                                     <td>{{$user->email}}</td>
                                                     <td>{{$user->address}}</td>
                                                     <td>{{$user->phone_number}}</td>
+                                                    <td>{{$user->department }}</td>
+
                                                     <td>
                                                         <div class="table-actions">
                                                             <a div class="table-actions">
@@ -68,6 +71,7 @@
                                                             <a href="#"><i class="ik ik-trash-2"></i></a>
                                                         </div>
                                                     </td>
+                                                    
                                                 </tr>
                                                     @include('admin.doctor.modal')
                                                 	@endforeach
