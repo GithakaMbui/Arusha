@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <p>
-        	<img src="{{asset('images')}}/{{$user->image}}" width="200">
+        	<img src="{{asset('images')}}/{{$user->photo}}" width="200">
           <p class="badge badge-pill badge-dark">Role: {{$user->role->name}}</p>
         	<p>Name: {{$user->name}}</p>
         	<p>Gender: {{$user->gender}}</p>

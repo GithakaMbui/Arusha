@@ -20,7 +20,7 @@
                                                 <a href="../index.html"><i class="ik ik-home"></i></a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#">Doctor</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Create</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Update</li>
                                         </ol>
                                     </nav>
                                 </div>
