@@ -57,7 +57,8 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.doctor.delete',compact('user'));
     }
 
     /**
@@ -111,10 +112,39 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+
+
+
+  public function destroy($id)
+{
+    // Check if the user is authenticated
+    if (!auth()->check()) {
+        return redirect()->back()->with('error', 'You must be logged in to perform this action.');
     }
+
+    // Prevent the authenticated user from deleting themselves
+    if (auth()->user()->id == $id) {
+        return redirect()->back()->with('error', 'You cannot delete your own account.');
+    }
+
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
+    }
+
+    $userDelete = $user->delete();
+
+    if ($userDelete) {
+        if (file_exists(public_path('images/'.$user->photo))) {
+            unlink(public_path('images/'.$user->photo));
+        }
+    }
+
+    return redirect()->back()->with('message', 'Doctor deleted successfully');
+}
+
+
 
     public function validateStore($request){
 
