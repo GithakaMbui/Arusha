@@ -32,6 +32,11 @@
 
                         <div class="row">
                             <div class="col-md-12">
+                                @if(Session::has('message'))
+                                    <div class="alert alert-success">
+                                    {{Session::get('message')}}
+                                        </div>
+                                @endif
                                 <div class="card">
                                     <div class="card-header"><h3>Doctor's Table</h3></div>
                                     <div class="card-body">
@@ -67,7 +72,7 @@
                                                             <a href="#" data-toggle="modal" data-target="#exampleModal{{$user->id}}">
                                                                 <i class="ik ik-eye"></i>
                                                             </a>
-                                                            <a href="#"><i class="ik ik-edit-2"></i></a>
+                                                            <a href="{{route('doctor.edit', [$user->id])}}"><i class="ik ik-edit-2"></i></a>
                                                             <a href="#"><i class="ik ik-trash-2"></i></a>
                                                         </div>
                                                     </td>

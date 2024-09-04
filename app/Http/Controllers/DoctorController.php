@@ -43,8 +43,7 @@ class DoctorController extends Controller
        $name = $photo->hashName();
        $destination = public_path('/images');
        $photo->move($destination, $name);
-
-       $data['photo'] = $name;
+        $data['photo'] = $name;
        $data['password'] = bcrypt($request->password);
        User::create($data);
 
@@ -84,7 +83,27 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validateUpdate($request, $id);
+        $data = $request->all(); 
+        $user = User::find($id);
+        $imageName=$user->photo;
+        $userPassword = $user->password;
+        if($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $imageName = $photo->hashName();
+            $destination = public_path('/images');
+            $photo->move($destination, $imageName);
+        }  
+            $data['photo'] = $imageName;
+
+        if($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }else{
+            $data['password'] = $userPassword;
+        }
+
+        $user->update($data);
+        return redirect()->route('doctor.index')->with('message', 'Doctor updated successfully');
     }
 
     /**
@@ -110,6 +129,24 @@ class DoctorController extends Controller
             'department' => 'required',
             'phone_number' => 'required|numeric',
             'photo' => 'required|mimes:jpeg,jpg,png',
+            'role_id' => 'required',
+            'description' => 'required',
+       ]);
+
+    }
+
+      public function validateUpdate($request, $id){
+
+      return  $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'email' => 'required|min:6|max:25',
+            'gender' => 'required',
+            'npi_number' => 'required',
+            'address' => 'required',
+            'department' => 'required',
+            'phone_number' => 'required|numeric',
+            'photo' => 'mimes:jpeg,jpg,png',
             'role_id' => 'required',
             'description' => 'required',
        ]);
